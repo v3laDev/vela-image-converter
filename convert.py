@@ -4,19 +4,14 @@ from PIL import Image
 
 def convert_image(input_file, output_format):
     try:
-        # Convertir a ruta absoluta
         input_file = os.path.abspath(input_file)
-        
-        # Verificar si el archivo existe
         if not os.path.exists(input_file):
             raise FileNotFoundError(f"File not found: {input_file}")
 
-        # Obtener nombre base del archivo y definir ruta de salida
         project_folder = os.path.dirname(os.path.abspath(__file__))
         base_name = os.path.splitext(os.path.basename(input_file))[0]
         output_file = os.path.join(project_folder, f"{base_name}.{output_format.lower()}")
 
-        # Abrir y guardar la imagen
         img = Image.open(input_file)
         img.save(output_file, output_format.upper())
         print(f"Image converted successfully and saved in the project folder: {output_file}")
